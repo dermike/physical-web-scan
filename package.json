@@ -24,6 +24,7 @@
   "dependencies": {
     "noble": "^0.3.6",
     "jsdom": "^1.2.1",
-    "chalk": "^0.5.1"
+    "chalk": "^0.5.1",
+    "node-notifier": "^4.0.2"
   }
 }
