@@ -1,0 +1,27 @@
+{
+  "name": "physical-web-scan",
+  "version": "0.1.0",
+  "description": "Node.JS app to scan for Physical Web beacons",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dermike/physical-web-scan.git"
+  },
+  "keywords": [
+    "physical",
+    "web",
+    "beacons"
+  ],
+  "author": "Mikael Jergefelt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dermike/physical-web-scan/issues"
+  },
+  "homepage": "https://github.com/dermike/physical-web-scan",
+  "dependencies": {
+    "noble": "^0.3.6"
+  }
+}
