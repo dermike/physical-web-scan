@@ -7,7 +7,7 @@ module.exports = function(url) {
   jsdom.env(url, function (errors, window) {
     if (!errors) {
       if (window.document.getElementsByTagName('title')[0]) {
-        title = window.document.getElementsByTagName('title')[0].innerHTML;
+        title = window.document.getElementsByTagName('title')[0].innerHTML.removeEntities();
       } else {
         title = 'Title not found';
       }
@@ -16,7 +16,7 @@ module.exports = function(url) {
       if (metatags) {
         for (var i = 0; i < metatags.length; i++) {
           if (metatags[i].getAttribute('name') == 'description') {
-            description += metatags[i].getAttribute('content');
+            description += metatags[i].getAttribute('content').removeEntities();
           }
         }
       }
@@ -54,4 +54,12 @@ module.exports = function(url) {
     }
     console.log(url);
   });
+}
+
+String.prototype.removeEntities = function() {
+  return this.replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, "&")
+    .replace(/&#039/g, "'");
 }
