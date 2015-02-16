@@ -24,10 +24,11 @@ noble.on('scanStop', function() {
 noble.on('discover', function(peripheral) {
   var serviceData = peripheral.advertisement.serviceData;
   if (serviceData && serviceData.length) {
+    var objects = [];
     for (var i in serviceData) {
       var url = uridecode(serviceData[i].data.toString('hex'));
-      metadata(url);
+      objects.push({url: url});
     }
+    metadata(objects);
   }
-  console.log();
 });

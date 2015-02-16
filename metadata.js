@@ -1,65 +1,62 @@
-var jsdom = require('jsdom');
+var http = require('http');
 var chalk = require('chalk');
 var notifier = require('node-notifier');
 
-module.exports = function(url) {
-  var title = '', description = '', favicon = '';
-  jsdom.env(url, function (errors, window) {
-    if (!errors) {
-      if (window.document.getElementsByTagName('title')[0]) {
-        title = window.document.getElementsByTagName('title')[0].innerHTML.removeEntities();
-      } else {
-        title = 'Title not found';
-      }
+module.exports = function(urls) {
+  var urls = JSON.stringify({objects: urls}),
+      headers = {
+        'Content-Type': 'application/json',
+        'Content-Length': urls.length
+      },
+      options = {
+        host: 'url-caster.appspot.com',
+        port: 80,
+        path: '/resolve-scan',
+        method: 'POST',
+        headers: headers
+  };
 
-      var metatags = window.document.getElementsByTagName('meta');
-      if (metatags) {
-        for (var i = 0; i < metatags.length; i++) {
-          if (metatags[i].getAttribute('name') == 'description') {
-            description += metatags[i].getAttribute('content').removeEntities();
-          }
+  var req = http.request(options, function(res) {
+    res.setEncoding('utf-8');
+
+    var responseString = '';
+
+    res.on('data', function(data) {
+      responseString += data;
+    });
+
+    res.on('end', function() {
+      try {
+        var response = JSON.parse(responseString);
+        for (var i in response.metadata) {
+          var data = response.metadata[i];
+          console.log(chalk.underline.bgBlue(' ' + data.title + ' '));
+          console.log(chalk.gray(data.description));
+          console.log(data.url);
+          console.log();
+
+          notifier.notify({
+            title: data.title,
+            subtitle: data.url,
+            message: data.description,
+            icon: './physicalweb.jpg',
+            contentImage: data.icon,
+            sound: true,
+            wait: true,
+            open: data.url
+          });
         }
       }
-
-      var metalinks = window.document.getElementsByTagName("link");
-      if (metalinks) {
-        for (var i = 0; i < metalinks.length; i++) {
-          if ((metalinks[i].getAttribute("rel") == "icon") || (metalinks[i].getAttribute("rel") == "shortcut icon")) {
-            favicon = metalinks[i].getAttribute("href");
-          }
-        }
-      } else {
-        favicon = '';
+      catch(e) {
+        console.log(e);
       }
-
-      if (description == '') {
-        description = 'No description';
-      }
-
-      window.close();
-
-      console.log(chalk.underline.bgBlue(' ' + title + ' '));
-      console.log(chalk.gray(description));
-      
-      notifier.notify({
-        title: title,
-        subtitle: url,
-        message: description,
-        icon: './physicalweb.jpg',
-        contentImage: favicon,
-        sound: true,
-        wait: true,
-        open: url
-      });
-    }
-    console.log(url);
+    });
   });
-}
 
-String.prototype.removeEntities = function() {
-  return this.replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, "&")
-    .replace(/&#039/g, "'");
+  req.on('error', function(e) {
+    console.log(e);
+  });
+
+  req.write(urls);
+  req.end();
 }
