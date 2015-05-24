@@ -32,12 +32,12 @@ module.exports = function(urls) {
           var data = response.metadata[i];
           console.log(chalk.underline.bgBlue(' ' + data.title + ' '));
           console.log(chalk.gray(data.description));
-          console.log(data.url);
+          console.log(data.displayUrl);
           console.log();
 
           notifier.notify({
             title: data.title,
-            subtitle: data.url,
+            subtitle: data.displayUrl,
             message: data.description,
             icon: './physicalweb.jpg',
             contentImage: data.icon,
