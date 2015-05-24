@@ -55,7 +55,6 @@ module.exports = function(urls) {
           
           notifier.notify({
             title: data.id,
-            subtitle: data.id,
             message: data.id,
             icon: './physicalweb.jpg',
             sound: true,
