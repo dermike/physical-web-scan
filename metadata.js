@@ -46,6 +46,23 @@ module.exports = function(urls) {
             open: data.url
           });
         }
+        
+        // display unresolved url's
+        for (var i in response.unresolved) {
+          var data = response.unresolved[i];
+          console.log(data.id);
+          console.log();
+          
+          notifier.notify({
+            title: data.id,
+            subtitle: data.id,
+            message: data.id,
+            icon: './physicalweb.jpg',
+            sound: true,
+            wait: true,
+            open: data.id
+          });
+        }
       }
       catch(e) {
         console.log(e);
