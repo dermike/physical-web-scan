@@ -5,7 +5,7 @@ var metadata = require('./metadata.js');
 
 noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
-    noble.startScanning(['fed8']);
+    noble.startScanning(['feaa']);
   } else {
     noble.stopScanning();
   }
@@ -26,9 +26,15 @@ noble.on('discover', function(peripheral) {
   if (serviceData && serviceData.length) {
     var objects = [];
     for (var i in serviceData) {
-      var url = uridecode(serviceData[i].data.toString('hex'));
-      objects.push({url: url});
+      
+      // check if Eddystone-URL 
+      if (serviceData[i].data.toString('hex').substr(0,2) === '10') { 
+        var url = uridecode(serviceData[i].data.toString('hex'));
+        objects.push({url: url});
+      }
     }
-    metadata(objects);
+    if (objects.length) {
+      metadata(objects);
+    }
   }
 });
