@@ -4,7 +4,7 @@ module.exports = function(serviceData) {
   for (var i = 2; i < buf.length ; i++) {
   
     // check for URI prefix
-    if (i === 2 && buf[i] >= 0 && buf[i] <= 4) {
+    if (i === 2 && buf[i] >= 0 && buf[i] <= 3) {
       switch (buf[i]) {
         case 0:
           url += 'http://www.';
@@ -17,9 +17,6 @@ module.exports = function(serviceData) {
           break;
         case 3:
           url += 'https://';
-          break;
-        case 4:
-          url += 'urn:uuid:';
           break;
       }
     } else {
