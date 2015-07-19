@@ -1,6 +1,6 @@
 var noble = require('noble');
 var chalk = require('chalk');
-var uridecode = require('./uridecode.js');
+var urldecode = require('./urldecode.js');
 var metadata = require('./metadata.js');
 
 noble.on('stateChange', function(state) {
@@ -29,7 +29,7 @@ noble.on('discover', function(peripheral) {
       
       // check if Eddystone-URL 
       if (serviceData[i].data.toString('hex').substr(0,2) === '10') { 
-        var url = uridecode(serviceData[i].data.toString('hex'));
+        var url = urldecode(serviceData[i].data.toString('hex'));
         objects.push({url: url});
       }
     }
