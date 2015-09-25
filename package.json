@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/dermike/physical-web-scan",
   "dependencies": {
-    "chalk": "^1.1.0",
+    "chalk": "1.1.0",
     "noble": "^1.1.0",
-    "node-notifier": "^4.2.3"
+    "node-notifier": "4.3.0"
   }
 }
