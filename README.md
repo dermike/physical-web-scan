@@ -13,13 +13,13 @@ Found beacons are displayed both in the terminal and as an alert in notification
 
 Needs [Node.js](https://nodejs.org/) to run.
 
-After cloning or downloading this repo, install the dependencies listed in package.json:
+After cloning or downloading this repo, install the dependencies listed in `package.json`:
 
 ```sh
 npm install
 ```
 
-Start scanning for Physical Web beacons by running index.js:
+Start scanning for Physical Web beacons by running `index.js`:
 
 ```sh
 node index.js
