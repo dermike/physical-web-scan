@@ -24,6 +24,6 @@
   "dependencies": {
     "chalk": "1.1.1",
     "noble": "^1.1.0",
-    "node-notifier": "4.3.0"
+    "node-notifier": "4.3.1"
   }
 }
