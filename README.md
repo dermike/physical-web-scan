@@ -3,6 +3,8 @@ physical-web-scan
 
 Node.js app to scan for [Physical Web](http://github.com/google/physical-web) beacons from your computer. Updated to scan for [Eddystone](https://github.com/google/eddystone) URL's. See history to use with UriBeacon format.
 
+**Note: There's also the option of using this desktop app version for OSX found here: [electron-physical-web-scan](https://github.com/dermike/electron-physical-web-scan).**
+
 Requires [Noble](https://github.com/sandeepmistry/noble) (Mac OS X and Linux are currently the only supported OSes)
 
 Found beacons are displayed both in the terminal and as an alert in notification center.
