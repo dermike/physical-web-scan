@@ -2,8 +2,8 @@ var http = require('http');
 var chalk = require('chalk');
 var notifier = require('node-notifier');
 
-module.exports = function(urls) {
-  var urls = JSON.stringify({objects: urls}),
+module.exports = function(urldata) {
+  var urls = JSON.stringify({objects: urldata}),
       headers = {
         'Content-Type': 'application/json',
         'Content-Length': urls.length
@@ -15,6 +15,23 @@ module.exports = function(urls) {
         method: 'POST',
         headers: headers
   };
+  
+  function urlOnly() {
+    var data = JSON.parse(urls);
+    for (var i in data.objects) {
+      console.log(chalk.underline.bgBlue(' ' + data.objects[i].url + ' '));
+      console.log(data.objects[i].url);
+      
+      notifier.notify({
+        title: data.objects[i].url,
+        message: data.objects[i].url,
+        icon: './physicalweb.jpg',
+        sound: true,
+        wait: true,
+        open: data.objects[i].url
+      });
+    }
+  }  
 
   var req = http.request(options, function(res) {
     res.setEncoding('utf-8');
@@ -49,12 +66,16 @@ module.exports = function(urls) {
       }
       catch(e) {
         console.log(e);
+        console.log();
+        urlOnly();
       }
     });
   });
 
   req.on('error', function(e) {
     console.log(e);
+    console.log();
+    urlOnly();
   });
 
   req.write(urls);
