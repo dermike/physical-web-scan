@@ -4,7 +4,7 @@ let noble = require('noble'),
   urldecode = require('./urldecode.js'),
   metadata = require('./metadata.js');
 
-noble.on('stateChange', (state) => {
+noble.on('stateChange', state => {
   if (state === 'poweredOn') {
     noble.startScanning(['feaa']);
   } else {
@@ -22,7 +22,7 @@ noble.on('scanStop', () => {
   console.log();
 });
 
-noble.on('discover', (peripheral) => {
+noble.on('discover', peripheral => {
   let serviceData = peripheral.advertisement.serviceData;
   if (serviceData && serviceData.length) {
     let objects = [];
