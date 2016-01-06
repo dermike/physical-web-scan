@@ -13,7 +13,7 @@ Found beacons are displayed both in the terminal and as an alert in notification
 
 ## Install
 
-Needs [Node.js](https://nodejs.org/) to run.
+Needs [Node.js](https://nodejs.org/) to run plus [Xcode](https://developer.apple.com/xcode/download/) and its `Command Line Tools` to build dependencies. You can find this under the menu `Xcode -> Preferences -> Downloads`.
 
 After cloning or downloading this repo, install the dependencies listed in `package.json`:
 
