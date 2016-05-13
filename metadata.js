@@ -10,7 +10,7 @@ module.exports = urldata => {
       'Content-Length': urls.length
     },
     options = {
-      'host': 'url-caster.appspot.com',
+      'host': 'service.physical-web.org',
       'port': 80,
       'path': '/resolve-scan',
       'method': 'POST',
